@@ -5,8 +5,7 @@
 #include "Keyboard.h"
 #include "computercase.h"
 #include "mouse.h"
-
-
+#include "Window.h"
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -15,7 +14,9 @@
 Table myTable1;
 Table myTable2;
 
-
+/* ----------  Biến cửa sổ (extern từ Window.cpp)  ---------- */
+extern float windowAngle;
+extern bool windowOpening;
 
 /* ----------  Camera & Chuyển động  ---------- */
 float cameraX = 0.0f, cameraY = 2.5f, cameraZ = 5.0f;
@@ -47,6 +48,7 @@ void init(void) {
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
+    glEnable(GL_LIGHT1);
     /* Thuộc tính vật liệu & chuẩn hoá pháp tuyến  */
     glEnable(GL_COLOR_MATERIAL);
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
@@ -133,6 +135,10 @@ void updateCamera() {
     if (cameraX > 4.5f) cameraX = 4.5f;
     if (cameraZ < -4.5f) cameraZ = -4.5f;
     if (cameraZ > 4.5f) cameraZ = 4.5f;
+
+    // Cập nhật góc cửa sổ
+    if (windowOpening && windowAngle < 90.0f)  windowAngle += 1.0f;
+    if (!windowOpening && windowAngle > 0.0f)  windowAngle -= 1.0f;
 
     // Xoay camera bằng phím mũi tên
     if (specialKeyStates[GLUT_KEY_LEFT])
@@ -236,6 +242,22 @@ void drawRoom(void) {
     // Vẽ case đặt dưới bàn (bên phải)
     drawComputerCase(4.2f, 0.25f, -2.65f, 270.0f);
 
+    //Vẽ cửa sổ với mặt trời
+    // ---- vẽ cửa sổ trên tường trái ----
+    float winWidth = 2.5f, winHeight = 1.8f, winThickness = 0.15f;
+    float winY = 1.5f; // Độ cao từ sàn
+
+    float winX = 0.0f, winZ = 4.99f; // Giữa tường trước
+
+    glPushMatrix();
+    glTranslatef(winX, winY, winZ);
+    glRotatef(180.0f, 0.0f, 1.0f, 0.0f);  // Xoay 180° để quay vào trong phòng
+    drawWindow(-winWidth / 2, 0, 0, winWidth, winHeight, winThickness);
+    glPopMatrix();
+
+    // Ánh sáng từ phía trước
+    updateSunLight(winX, winY + winHeight / 2, winZ - 0.2f, windowAngle > 10.0f);
+
 
     myTable2.setPosition(4.35f, 0.0f, 0.5f);  // Move to right wall (x=4.0)
     myTable2.setScale(0.8f, 1.0f, 0.6f);      // Make it smaller
@@ -257,6 +279,9 @@ void keyboard(unsigned char key, int x, int y) {
     switch (key) {
     case 'l': case 'L':                 // Bật / tắt đèn
         lightOn = !lightOn;
+        break;
+    case 'o': case 'O':        // bật/tắt mở cửa
+        windowOpening = !windowOpening;
         break;
     }
 
@@ -309,8 +334,6 @@ int main(int argc, char** argv) {
     glutSpecialFunc(specialKeys);
     glutSpecialUpFunc(specialKeysUp);
     glutIdleFunc(idle);
-
-
 
     glutMainLoop();
     return 0;

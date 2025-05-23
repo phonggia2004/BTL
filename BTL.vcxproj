@@ -133,6 +133,7 @@
     <ClCompile Include="manmaytinh.cpp" />
     <ClCompile Include="phong.cpp" />
     <ClCompile Include="mouse.cpp" />
+    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="computercase.h" />
@@ -140,6 +141,7 @@
     <ClInclude Include="mouse.h" />
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="Table.h" />
+    <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
