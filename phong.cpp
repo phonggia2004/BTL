@@ -1,4 +1,4 @@
-#include <GL/glut.h>
+#include "GL/glut.h"
 #include <math.h>
 #include "Table.h"
 #include "ComputerMonitor.h"
@@ -6,6 +6,8 @@
 #include "computercase.h"
 #include "mouse.h"
 #include "Window.h"
+#include "DongHo.h"
+
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
@@ -226,6 +228,10 @@ void drawRoom(void) {
     myTable1.setTopColor(0.7f, 0.4f, 0.1f);
     myTable1.setLegColor(0.5f, 0.25f, 0.1f);
     myTable1.setRotation(90.0f);
+
+    // Vẽ đồng hồ ở góc trên bên phải tường nhìn từ cửa sổ
+    drawClock(4.9f, 4.0f, 3.5f, 0.4f);  // Gần tường phải (x=4.9), cao (y=4.0)
+
     // Trong hàm vẽ:
     myTable1.draw();
 
@@ -266,6 +272,7 @@ void drawRoom(void) {
     myTable2.setRotation(90.0f);
     // Trong hàm vẽ:
     myTable2.draw();
+
 
     glutSwapBuffers();
 }
@@ -320,6 +327,19 @@ void reshape(int w, int h) {
     glMatrixMode(GL_MODELVIEW);
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* ----------  main ---------- */
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
@@ -334,6 +354,14 @@ int main(int argc, char** argv) {
     glutSpecialFunc(specialKeys);
     glutSpecialUpFunc(specialKeysUp);
     glutIdleFunc(idle);
+    glutDisplayFunc(drawRoom);
+
+    glPushMatrix();
+    glTranslatef(2.4f, 1.8f, -1.9f);
+    glColor3f(1.0f, 0.0f, 0.0f); // màu đỏ để dễ thấy
+    glutSolidCube(0.1);
+    glPopMatrix();
+
 
     glutMainLoop();
     return 0;

@@ -130,6 +130,7 @@
     <ClCompile Include="ban.cpp" />
     <ClCompile Include="banphim.cpp" />
     <ClCompile Include="computercase.cpp" />
+    <ClCompile Include="DongHo.cpp" />
     <ClCompile Include="manmaytinh.cpp" />
     <ClCompile Include="phong.cpp" />
     <ClCompile Include="mouse.cpp" />
@@ -138,8 +139,10 @@
   <ItemGroup>
     <ClInclude Include="computercase.h" />
     <ClInclude Include="ComputerMonitor.h" />
+    <ClInclude Include="DongHo.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="keyboard.h" />
+    <ClInclude Include="speaker.h" />
     <ClInclude Include="Table.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
