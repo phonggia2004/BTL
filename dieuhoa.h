@@ -3,11 +3,11 @@
 
 class AirConditioner {
 private:
-    float x, y, z;          // Vị trí của điều hòa
-    float width, height, depth; // Kích thước điều hòa
-    bool isOn;              // Trạng thái bật/tắt
-    float bodyColor[3];     // Màu thân điều hòa
-    float ventColor[3];     // Màu khe gió
+    float x, y, z;          
+    float width, height, depth; 
+    bool isOn;             
+    float bodyColor[3];    
+    float ventColor[3];     
 
 public:
     AirConditioner();

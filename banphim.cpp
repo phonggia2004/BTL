@@ -10,14 +10,13 @@ void drawKeyboard(float x, float y, float z, float rotationY) {
     glTranslatef(x, y, z);
     glRotatef(rotationY, 0.0f, 1.0f, 0.0f);
 
-    // Bề mặt bàn phím
     glColor3fv(keyboardColor);
     glPushMatrix();
     glScalef(0.6f, 0.02f, 0.2f);
     glutSolidCube(1.0f);
     glPopMatrix();
 
-    // Các hàng phím nhỏ
+
     glColor3fv(keyColor);
     for (int row = 0; row < 3; ++row) {
         for (int col = 0; col < 10; ++col) {
@@ -29,11 +28,10 @@ void drawKeyboard(float x, float y, float z, float rotationY) {
         }
     }
 
-    // Phím space
     glColor3fv(spaceColor);
     glPushMatrix();
-    glTranslatef(0.0f, 0.01f, -0.08f); // Hạ thấp hơn và kéo xuống phía sau
-    glScalef(0.35f, 0.01f, 0.035f);   // Rộng, thấp, dài
+    glTranslatef(0.0f, 0.01f, -0.08f); 
+    glScalef(0.35f, 0.01f, 0.035f);   
     glutSolidCube(1.0f);
     glPopMatrix();
 

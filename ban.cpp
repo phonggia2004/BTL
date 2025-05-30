@@ -4,9 +4,9 @@
 Table::Table(float x, float y, float z, float sx, float sy, float sz)
     : posX(x), posY(y), posZ(z), scaleX(sx), scaleY(sy), scaleZ(sz), rotationAngle(0.0f)
 {
-    // Mặc định màu mặt bàn nâu
+    // màu mặt bàn nâu
     topColor[0] = 0.6f; topColor[1] = 0.3f; topColor[2] = 0.0f;
-    // Mặc định màu chân bàn đậm hơn
+
     legColor[0] = 0.4f; legColor[1] = 0.2f; legColor[2] = 0.0f;
 }
 
@@ -35,22 +35,21 @@ void Table::drawCube(float width, float height, float depth) {
     float h = height / 2;
     float d = depth / 2;
     glBegin(GL_QUADS);
-    // Front
     glVertex3f(-w, -h, d); glVertex3f(w, -h, d);
     glVertex3f(w, h, d); glVertex3f(-w, h, d);
-    // Back
+
     glVertex3f(-w, -h, -d); glVertex3f(-w, h, -d);
     glVertex3f(w, h, -d); glVertex3f(w, -h, -d);
-    // Top
+
     glVertex3f(-w, h, -d); glVertex3f(-w, h, d);
     glVertex3f(w, h, d); glVertex3f(w, h, -d);
-    // Bottom
+
     glVertex3f(-w, -h, -d); glVertex3f(w, -h, -d);
     glVertex3f(w, -h, d); glVertex3f(-w, -h, d);
-    // Left
+
     glVertex3f(-w, -h, -d); glVertex3f(-w, -h, d);
     glVertex3f(-w, h, d); glVertex3f(-w, h, -d);
-    // Right
+
     glVertex3f(w, -h, -d); glVertex3f(w, h, -d);
     glVertex3f(w, h, d); glVertex3f(w, -h, d);
     glEnd();
@@ -58,23 +57,20 @@ void Table::drawCube(float width, float height, float depth) {
 
 void Table::draw() {
     glPushMatrix();
-    // Di chuyển đến vị trí bàn
     glTranslatef(posX, posY, posZ);
 
-    // Áp dụng xoay cho toàn bộ bàn
     glRotatef(rotationAngle, 0.0f, 1.0f, 0.0f);
 
-    // Phóng to theo tỉ lệ scale
     glScalef(scaleX, scaleY, scaleZ);
 
-    // Vẽ mặt bàn
+
     glPushMatrix();
     glColor3fv(topColor);
     glTranslatef(0.0f, 1.0f, 0.0f);
     drawCube(3.0f, 0.2f, 2.0f);
     glPopMatrix();
 
-    // Vẽ 4 chân bàn
+
     float legX = 1.3f;
     float legZ = 0.8f;
     float legHeight = 1.0f;

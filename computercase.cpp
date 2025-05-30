@@ -21,7 +21,7 @@ void drawComputerCase(float x, float y, float z, float rotationY) {
     // Mặt trước (gắn chi tiết vào)
     glColor3fv(frontPanelColor);
     glPushMatrix();
-    glTranslatef(0.0f, 0.0f, 0.25f); // đẩy ra phía trước của case
+    glTranslatef(0.0f, 0.0f, 0.25f); 
     glScalef(0.34f, 0.68f, 0.01f);
     glutSolidCube(1.0f);
     glPopMatrix();

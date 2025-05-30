@@ -3,10 +3,20 @@
 
 AirConditioner::AirConditioner() {
     x = y = z = 0.0f;
-    width = 1.0f; height = 0.4f; depth = 0.2f;
+    width = 1.0f;
+    height = 0.25f;
+    depth = 0.22f;
     isOn = false;
-    bodyColor[0] = 0.9f; bodyColor[1] = 0.9f; bodyColor[2] = 0.9f; // Màu trắng xám
-    ventColor[0] = 0.3f; ventColor[1] = 0.3f; ventColor[2] = 0.3f; // Màu xám đậm
+
+    // Màu trắng cho thân điều hòa
+    bodyColor[0] = 1.0f;
+    bodyColor[1] = 1.0f;
+    bodyColor[2] = 1.0f;
+
+    // Màu xám đậm cho khe gió
+    ventColor[0] = 0.2f;
+    ventColor[1] = 0.2f;
+    ventColor[2] = 0.2f;
 }
 
 void AirConditioner::setPosition(float x, float y, float z) {
@@ -49,8 +59,10 @@ void AirConditioner::draw() const {
     glPushMatrix();
     glTranslatef(x, y, z);
 
-    // Vẽ thân điều hòa
+    // Đặt màu thân điều hòa
     glColor3fv(bodyColor);
+
+    // Vẽ thân điều hòa (hình hộp chữ nhật)
     glBegin(GL_QUADS);
     // Mặt trước
     glNormal3f(0, 0, 1);
@@ -58,30 +70,35 @@ void AirConditioner::draw() const {
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(width / 2, height / 2, depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
+
     // Mặt sau
     glNormal3f(0, 0, -1);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
+
     // Mặt trên
     glNormal3f(0, 1, 0);
     glVertex3f(-width / 2, height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, -depth / 2);
     glVertex3f(width / 2, height / 2, depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
+
     // Mặt dưới
     glNormal3f(0, -1, 0);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, -depth / 2);
     glVertex3f(width / 2, -height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, depth / 2);
+
     // Mặt trái
     glNormal3f(-1, 0, 0);
     glVertex3f(-width / 2, -height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, -depth / 2);
     glVertex3f(-width / 2, height / 2, depth / 2);
     glVertex3f(-width / 2, -height / 2, depth / 2);
+
     // Mặt phải
     glNormal3f(1, 0, 0);
     glVertex3f(width / 2, -height / 2, -depth / 2);
@@ -90,27 +107,32 @@ void AirConditioner::draw() const {
     glVertex3f(width / 2, -height / 2, depth / 2);
     glEnd();
 
-    // Vẽ khe gió (mặt trước, phía dưới)
+    // Vẽ khe gió (nhiều nan ngang)
+    glDisable(GL_LIGHTING); 
     glColor3fv(ventColor);
-    glBegin(GL_QUADS);
-    glNormal3f(0, 0, 1);
-    glVertex3f(-width / 2 + 0.1f, -height / 2 + 0.05f, depth / 2 + 0.01f);
-    glVertex3f(width / 2 - 0.1f, -height / 2 + 0.05f, depth / 2 + 0.01f);
-    glVertex3f(width / 2 - 0.1f, -height / 2 + 0.15f, depth / 2 + 0.01f);
-    glVertex3f(-width / 2 + 0.1f, -height / 2 + 0.15f, depth / 2 + 0.01f);
-    glEnd();
-
-    // Hiệu ứng khi điều hòa bật (đèn nhỏ màu xanh)
-    if (isOn) {
-        glPushAttrib(GL_LIGHTING_BIT);
-        glDisable(GL_LIGHTING);
-        glColor3f(0.0f, 1.0f, 0.0f); // Màu xanh lá
-        glPushMatrix();
-        glTranslatef(width / 2 - 0.1f, -height / 2 + 0.1f, depth / 2 + 0.02f);
-        glutSolidSphere(0.03f, 10, 10);
-        glPopMatrix();
-        glPopAttrib();
+    float barHeight = 0.005f;
+    float spacing = 0.01f;
+    for (float i = 0.0f; i < 0.1f; i += spacing) {
+        glBegin(GL_QUADS);
+        glNormal3f(0, 0, 1);
+        glVertex3f(-width / 2 + 0.1f, -height / 2 + 0.05f + i, depth / 2 + 0.01f);
+        glVertex3f(width / 2 - 0.1f, -height / 2 + 0.05f + i, depth / 2 + 0.01f);
+        glVertex3f(width / 2 - 0.1f, -height / 2 + 0.05f + i + barHeight, depth / 2 + 0.01f);
+        glVertex3f(-width / 2 + 0.1f, -height / 2 + 0.05f + i + barHeight, depth / 2 + 0.01f);
+        glEnd();
     }
 
+    // Màn hình LED nhỏ khi bật
+    if (isOn) {
+        glColor3f(0.8f, 0.8f, 1.0f); // xanh nhạt
+        glBegin(GL_QUADS);
+        glVertex3f(width / 2 - 0.15f, height / 2 - 0.1f, depth / 2 + 0.01f);
+        glVertex3f(width / 2 - 0.1f, height / 2 - 0.1f, depth / 2 + 0.01f);
+        glVertex3f(width / 2 - 0.1f, height / 2 - 0.05f, depth / 2 + 0.01f);
+        glVertex3f(width / 2 - 0.15f, height / 2 - 0.05f, depth / 2 + 0.01f);
+        glEnd();
+    }
+
+    glEnable(GL_LIGHTING); // bật lại ánh sáng cho các đối tượng khác
     glPopMatrix();
 }

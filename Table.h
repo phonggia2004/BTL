@@ -5,11 +5,11 @@
 
 class Table {
 private:
-    float posX, posY, posZ;     // Vị trí bàn
-    float scaleX, scaleY, scaleZ; // Kích thước phóng to/thay đổi
-    float topColor[3];          // Màu mặt bàn (RGB)
-    float legColor[3];          // Màu chân bàn (RGB)
-    float rotationAngle;        // Góc xoay của bàn
+    float posX, posY, posZ;     
+    float scaleX, scaleY, scaleZ; 
+    float topColor[3];          
+    float legColor[3];         
+    float rotationAngle;        
     void drawCube(float width, float height, float depth);
 public:
     Table(float x = 0, float y = 0, float z = 0,
@@ -22,4 +22,4 @@ public:
     void draw();
 };
 
-#endif // TABLE_H
+#endif 

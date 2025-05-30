@@ -128,23 +128,50 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="ban.cpp" />
+    <ClCompile Include="bang.cpp" />
     <ClCompile Include="banphim.cpp" />
+    <ClCompile Include="Bookshelf.cpp" />
+    <ClCompile Include="car.cpp" />
+    <ClCompile Include="chaucay.cpp" />
     <ClCompile Include="computercase.cpp" />
+    <ClCompile Include="DeskLamp.cpp" />
+    <ClCompile Include="dieuhoa.cpp" />
     <ClCompile Include="DongHo.cpp" />
+    <ClCompile Include="Door.cpp" />
+    <ClCompile Include="kedo.cpp" />
     <ClCompile Include="manmaytinh.cpp" />
+    <ClCompile Include="NotebookPen.cpp" />
     <ClCompile Include="phong.cpp" />
     <ClCompile Include="mouse.cpp" />
-    <ClCompile Include="Window.cpp" />
+    <ClCompile Include="Printer.cpp" />
+    <ClCompile Include="tham.cpp" />
+    <ClCompile Include="TrashBin.cpp" />
+    <ClCompile Include="tudungdo.cpp" />
+    <ClCompile Include="window.cpp" />
+    <ClCompile Include="WorkChair.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bang.h" />
+    <ClInclude Include="Bookshelf.h" />
+    <ClInclude Include="car.h" />
+    <ClInclude Include="carpet.h" />
     <ClInclude Include="computercase.h" />
     <ClInclude Include="ComputerMonitor.h" />
+    <ClInclude Include="desklamp.h" />
+    <ClInclude Include="dieuhoa.h" />
     <ClInclude Include="DongHo.h" />
+    <ClInclude Include="chaucay.h" />
+    <ClInclude Include="door.h" />
+    <ClInclude Include="NotebookPen.h" />
+    <ClInclude Include="Printer.h" />
+    <ClInclude Include="TrashBin.h" />
+    <ClInclude Include="WorkChair.h" />
+    <ClInclude Include="kedo.h" />
     <ClInclude Include="mouse.h" />
     <ClInclude Include="keyboard.h" />
-    <ClInclude Include="speaker.h" />
     <ClInclude Include="Table.h" />
-    <ClInclude Include="Window.h" />
+    <ClInclude Include="tudungdo.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
